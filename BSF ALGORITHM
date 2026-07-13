@@ -1,0 +1,11 @@
+Algorithm:
+Create a graph using an adjacency list.
+Create an empty queue.
+Mark the starting node as visited.
+Insert the starting node into the queue.
+While the queue is not empty:
+Remove the front node.
+Print the node.
+Visit all unvisited adjacent nodes.
+Mark them as visited and add them to the queue.
+Stop when the queue becomes empty.
