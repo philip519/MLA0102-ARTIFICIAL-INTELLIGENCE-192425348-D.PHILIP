@@ -1,0 +1,8 @@
+Algorithm:
+Create a graph using an adjacency list.
+Create an empty set for visited nodes.
+Start from the given node.
+Mark the node as visited.
+Print the node.
+Visit each unvisited adjacent node recursively.
+Continue until all nodes are visited.
