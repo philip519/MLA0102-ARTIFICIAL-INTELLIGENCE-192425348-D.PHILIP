@@ -1,0 +1,7 @@
+Algorithm:
+Take the capacities of Jug A and Jug B.
+Fill Jug A completely.
+Pour water from Jug A into Jug B.
+If Jug B becomes full, empty it.
+Repeat until the required quantity is obtained.
+Display the steps.
