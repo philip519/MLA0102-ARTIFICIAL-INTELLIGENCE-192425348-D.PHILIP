@@ -1,0 +1,11 @@
+jug1 = 4
+jug2 = 3
+
+print("Steps to get 2 liters:")
+print("1. Fill Jug1 (4L)")
+print("2. Pour Jug1 -> Jug2")
+print("3. Empty Jug2")
+print("4. Pour remaining water from Jug1 -> Jug2")
+print("5. Fill Jug1 again")
+print("6. Pour Jug1 -> Jug2 until Jug2 is full")
+print("Result: Jug1 contains 2 liters")
