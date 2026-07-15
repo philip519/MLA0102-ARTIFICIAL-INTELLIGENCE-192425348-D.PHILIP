@@ -1,0 +1,7 @@
+Algorithm:
+Create a weighted graph.
+Initialize a priority queue with the start node and cost 0.
+Remove the node with the smallest cost.
+If it is the goal node, stop and display the cost.
+Otherwise, add all unvisited neighbors with their cumulative costs.
+Repeat until the goal is found.
