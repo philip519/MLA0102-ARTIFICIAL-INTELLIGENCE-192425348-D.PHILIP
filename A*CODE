@@ -1,0 +1,35 @@
+import heapq
+
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 3)],
+    'C': [('D', 1)],
+    'D': []
+}
+
+heuristic = {
+    'A': 4,
+    'B': 2,
+    'C': 1,
+    'D': 0
+}
+
+pq = [(heuristic['A'], 0, 'A')]
+visited = set()
+
+print("A* Search:")
+
+while pq:
+    f, g, node = heapq.heappop(pq)
+
+    if node not in visited:
+        visited.add(node)
+        print(node)
+
+        if node == 'D':
+            break
+
+        for neighbor, cost in graph[node]:
+            new_g = g + cost
+            new_f = new_g + heuristic[neighbor]
+            heapq.heappush(pq, (new_f, new_g, neighbor))
