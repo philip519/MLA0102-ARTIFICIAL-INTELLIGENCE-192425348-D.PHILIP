@@ -1,0 +1,7 @@
+Algorithm:
+Create a weighted graph and heuristic values.
+Add the start node to a priority queue with cost 0.
+Remove the node having the smallest f = g + h.
+If it is the goal node, stop.
+Otherwise, update the path cost and add neighbors.
+Repeat until the goal is found.
