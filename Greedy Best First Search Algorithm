@@ -1,0 +1,7 @@
+Algorithm
+Create a graph and heuristic values.
+Insert the start node into a priority queue.
+Select the node with the smallest heuristic value.
+Print the selected node.
+Add its unvisited neighbors.
+Continue until the goal node is reached.
