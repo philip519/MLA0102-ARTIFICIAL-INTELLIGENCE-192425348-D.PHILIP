@@ -1,0 +1,32 @@
+import heapq
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D'],
+    'C': ['E'],
+    'D': [],
+    'E': []
+}
+
+heuristic = {
+    'A': 5,
+    'B': 3,
+    'C': 2,
+    'D': 1,
+    'E': 0
+}
+
+visited = set()
+pq = [(heuristic['A'], 'A')]
+
+print("Greedy Best First Search:")
+
+while pq:
+    h, node = heapq.heappop(pq)
+
+    if node not in visited:
+        visited.add(node)
+        print(node)
+
+        for i in graph[node]:
+            heapq.heappush(pq, (heuristic[i], i))
