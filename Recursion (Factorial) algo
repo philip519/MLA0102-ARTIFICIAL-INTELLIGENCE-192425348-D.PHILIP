@@ -1,0 +1,5 @@
+Algorithm:
+Read a number n.
+If n is 0 or 1, return 1.
+Otherwise, return n × factorial(n-1).
+Print the factorial.
