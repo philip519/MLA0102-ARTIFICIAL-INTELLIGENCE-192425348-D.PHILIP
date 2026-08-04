@@ -1,0 +1,8 @@
+Algorithm:
+Read the number of disks n.
+If n == 1, move the disk from source to destination.
+Otherwise:
+Move n-1 disks from source to helper.
+Move the largest disk from source to destination.
+Move n-1 disks from helper to destination.
+Repeat until all disks are moved.
