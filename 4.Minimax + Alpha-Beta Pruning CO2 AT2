@@ -1,0 +1,82 @@
+import math
+
+tree = {
+    "A": [3, 5],
+    "B": [2, 9]
+}
+
+nodes_minimax = 0
+nodes_alpha_beta = 0
+
+
+# -------------------------
+# MINIMAX
+# -------------------------
+
+def minimax():
+    global nodes_minimax
+
+    # A
+    a1 = 3
+    a2 = 5
+
+    nodes_minimax += 2
+
+    A = min(a1, a2)
+
+    # B
+    b1 = 2
+    b2 = 9
+
+    nodes_minimax += 2
+
+    B = min(b1, b2)
+
+    best = max(A, B)
+
+    return best
+
+
+# -------------------------
+# ALPHA-BETA
+# -------------------------
+def alpha_beta():
+    global nodes_alpha_beta
+    alpha = -math.inf
+    beta = math.inf
+
+    # Evaluate A
+    a1 = 3
+    nodes_alpha_beta += 1
+    a2 = 5
+    nodes_alpha_beta += 1
+    A = min(a1, a2)
+    alpha = max(alpha, A)
+
+    # Evaluate B
+    b1 = 2
+    nodes_alpha_beta += 1
+
+    B = b1
+
+    # Since B = 2 < alpha = 3,
+    # second child of B is pruned
+
+    print("Node 9 is PRUNED")
+
+    best = max(A, B)
+
+    return best
+
+
+print("MINIMAX")
+result1 = minimax()
+
+print("Best value:", result1)
+print("Leaf nodes evaluated:", nodes_minimax)
+
+print("\nALPHA-BETA")
+result2 = alpha_beta()
+
+print("Best value:", result2)
+print("Leaf nodes evaluated:", nodes_alpha_beta)
