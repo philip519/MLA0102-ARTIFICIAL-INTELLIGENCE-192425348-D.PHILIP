@@ -1,0 +1,71 @@
+grid = [
+    ['S', '.', '.', '.'],
+    ['.', 'X', '.', '.'],
+    ['.', '.', 'X', '.'],
+    ['.', '.', '.', 'G']
+]
+
+start = (0, 0)
+goal = (3, 3)
+
+
+def distance(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+
+def get_neighbors(position):
+    r, c = position
+
+    moves = [
+        (-1, 0),
+        (1, 0),
+        (0, -1),
+        (0, 1)
+    ]
+
+    neighbors = []
+
+    for dr, dc in moves:
+
+        nr = r + dr
+        nc = c + dc
+
+        if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]):
+
+            if grid[nr][nc] != 'X':
+                neighbors.append((nr, nc))
+
+    return neighbors
+
+
+current = start
+path = [current]
+
+while current != goal:
+
+    neighbors = get_neighbors(current)
+
+    if not neighbors:
+        print("Robot is blocked!")
+        break
+
+    # Select neighbor closest to goal
+    next_position = min(
+        neighbors,
+        key=lambda x: distance(x, goal)
+    )
+
+    current = next_position
+    path.append(current)
+
+    print("Robot moved to:", current)
+
+print("\nFinal Path:")
+
+for position in path:
+    print(position)
+
+if current == goal:
+    print("\nGoal reached!")
+else:
+    print("\nGoal not reached!")
