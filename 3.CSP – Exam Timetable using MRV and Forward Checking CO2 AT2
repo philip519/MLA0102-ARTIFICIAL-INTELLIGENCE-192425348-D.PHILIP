@@ -1,0 +1,92 @@
+subjects = ["AI", "DBMS", "OS", "Networks", "Maths"]
+
+domains = {
+    "AI": ["Morning", "Afternoon", "Evening"],
+    "DBMS": ["Morning", "Afternoon", "Evening"],
+    "OS": ["Morning", "Afternoon", "Evening"],
+    "Networks": ["Morning", "Afternoon", "Evening"],
+    "Maths": ["Morning", "Afternoon", "Evening"]
+}
+
+# Conflicting subjects
+conflicts = {
+    "AI": ["DBMS", "OS"],
+    "DBMS": ["AI", "Networks"],
+    "OS": ["AI", "Maths"],
+    "Networks": ["DBMS", "Maths"],
+    "Maths": ["OS", "Networks"]
+}
+
+assignment = {}
+
+
+def is_valid(subject, slot):
+    for other in conflicts[subject]:
+        if assignment.get(other) == slot:
+            return False
+    return True
+
+
+def mrv():
+    unassigned = [s for s in subjects if s not in assignment]
+
+    return min(
+        unassigned,
+        key=lambda s: len(domains[s])
+    )
+
+
+def forward_check(subject, slot):
+    removed = {}
+
+    for neighbor in conflicts[subject]:
+
+        if neighbor not in assignment:
+            if slot in domains[neighbor]:
+                domains[neighbor].remove(slot)
+                removed.setdefault(neighbor, []).append(slot)
+
+                if len(domains[neighbor]) == 0:
+                    return False, removed
+
+    return True, removed
+
+
+def restore(removed):
+    for subject, values in removed.items():
+        domains[subject].extend(values)
+
+
+def solve():
+
+    if len(assignment) == len(subjects):
+        return True
+
+    subject = mrv()
+
+    for slot in domains[subject][:]:
+
+        if is_valid(subject, slot):
+
+            assignment[subject] = slot
+
+            success, removed = forward_check(
+                subject, slot
+            )
+
+            if success and solve():
+                return True
+
+            restore(removed)
+            del assignment[subject]
+
+    return False
+
+
+if solve():
+    print("Exam Timetable:")
+
+    for subject in subjects:
+        print(subject, "->", assignment[subject])
+else:
+    print("No solution found")
