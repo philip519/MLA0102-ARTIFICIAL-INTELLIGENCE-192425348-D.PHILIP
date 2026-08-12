@@ -1,0 +1,56 @@
+import heapq
+
+graph = {
+    'S': ['A', 'B'],
+    'A': ['C', 'D'],
+    'B': ['D'],
+    'C': ['G'],
+    'D': ['G'],
+    'G': []
+}
+
+# Heuristic values
+h = {
+    'S': 7,
+    'A': 5,
+    'B': 4,
+    'C': 3,
+    'D': 2,
+    'G': 0
+}
+
+start = 'S'
+goal = 'G'
+
+pq = [(h[start], start)]
+visited = set()
+parent = {start: None}
+
+while pq:
+    value, node = heapq.heappop(pq)
+
+    if node in visited:
+        continue
+
+    visited.add(node)
+    print("Expanded:", node, "h =", h[node])
+
+    if node == goal:  
+        break
+
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            parent[neighbor] = node
+            heapq.heappush(pq, (h[neighbor], neighbor))
+
+# Create path
+path = []
+node = goal
+
+while node is not None:
+    path.append(node)
+    node = parent[node]
+
+path.reverse()
+
+print("Path:", " -> ".join(path))
