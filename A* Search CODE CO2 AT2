@@ -1,0 +1,64 @@
+import heapq
+
+graph = {
+    'S': [('A', 2), ('B', 4)],
+    'A': [('C', 1), ('G', 7)],
+    'B': [('C', 2)],
+    'C': [('G', 2)],
+    'G': []
+}
+
+# Heuristic values
+h = {
+    'S': 5,
+    'A': 3,
+    'B': 4,
+    'C': 2,
+    'G': 0
+}
+
+start = 'S'
+goal = 'G'
+
+pq = [(h[start], 0, start)]
+g_cost = {start: 0}
+parent = {start: None}
+
+while pq:
+    f, g, node = heapq.heappop(pq)
+
+    print("Expanded:", node,
+          "g =", g,
+          "h =", h[node],
+          "f =", f)
+
+    if node == goal:
+        break
+
+    for neighbor, cost in graph[node]:
+
+        new_g = g + cost
+
+        if neighbor not in g_cost or new_g < g_cost[neighbor]:
+            g_cost[neighbor] = new_g
+            f_cost = new_g + h[neighbor]
+
+            parent[neighbor] = node
+
+            heapq.heappush(
+                pq,
+                (f_cost, new_g, neighbor)
+            )
+
+# Create path
+path = []
+node = goal
+
+while node is not None:
+    path.append(node)
+    node = parent[node]
+
+path.reverse()
+
+print("Optimal Path:", " -> ".join(path))
+print("Total Cost:", g_cost[goal])
